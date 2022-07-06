@@ -16,7 +16,7 @@ const Users = () => {
 
     const changeClasses = () => {
       let classes = "badge "
-      classes += users.length === 0 ? "bg-danger bg-primary" : "bg-primary bg-primary"
+      classes += users.length === 0 ? "bg-danger bg-primary" : "bg-primary"
       return classes;
     }
 
@@ -29,12 +29,12 @@ const usersTableHeaderRender = () => {
       return (
         users.length !== 0
         && <tr className="table-primary">
-          <th scope="col">Имя</th>
-          <th scope="col">Качества</th>
-          <th scope="col">Профессия</th>
-          <th scope="col">Встретился, раз</th>
-          <th scope="col">Оценка</th>
-          <th scope="col"></th>
+          <th className="table-primary" scope="col">Имя</th>
+          <th className="table-primary" scope="col">Качества</th>
+          <th className="table-primary" scope="col">Профессия</th>
+          <th className="table-primary" scope="col">Встретился, раз</th>
+          <th className="table-primary" scope="col">Оценка</th>
+          <th className="table-primary" scope="col"></th>
         </tr>
       )
     }
