@@ -14,6 +14,12 @@ const Users = () => {
         return message;
     }
 
+    const changeClasses = () => {
+      let classes = "badge "
+      classes += users.length === 0 ? "bg-danger bg-primary" : "bg-primary bg-primary"
+      return classes;
+    }
+
     const handleDeleteUser = (id)=>{
       console.log(id)
       setCountPeople((prevState) => prevState.filter((user) => user._id !== id));
@@ -22,7 +28,7 @@ const Users = () => {
 const usersTableHeaderRender = () => {
       return (
         users.length !== 0
-        && <tr>
+        && <tr className="table-primary">
           <th scope="col">Имя</th>
           <th scope="col">Качества</th>
           <th scope="col">Профессия</th>
@@ -36,13 +42,13 @@ const usersTableHeaderRender = () => {
     const usersTableBodyRender = () => {
       return (
         users.length !== 0 && users.map((user) => (
-      <tr key={user._id}>
-        <td scope="col">{user.name}</td>
-        <td scope="col">{user.qualities.map((qualitie) => <span className={"badge m-1 bg-" + qualitie.color} key={qualitie._id}>{qualitie.name}</span>)}</td>
-        <td scope="col" key={user.profession._id}>{user.profession.name}</td>
-        <td scope="col">{user.completedMeetings}</td>
-        <td scope="col">{user.rate}</td>
-        <td scope="col"><button type="button" className="btn btn-primary" onClick={() => handleDeleteUser(user._id)}>Удалить</button></td>
+      <tr className="table-primary" key={user._id}>
+        <td className="table-primary" scope="col">{user.name}</td>
+        <td className="table-primary" scope="col">{user.qualities.map((qualitie) => <span className={"badge m-1 bg-" + qualitie.color} key={qualitie._id}>{qualitie.name}</span>)}</td>
+        <td className="table-primary" scope="col" key={user.profession._id}>{user.profession.name}</td>
+        <td className="table-primary" scope="col">{user.completedMeetings}</td>
+        <td className="table-primary" scope="col">{user.rate}</td>
+        <td className="table-primary" scope="col"><button type="button" className="btn btn-primary" onClick={() => handleDeleteUser(user._id)}>Удалить</button></td>
       </tr>
         ))
       )
@@ -52,7 +58,7 @@ const usersTableHeaderRender = () => {
     
     return(    
     <>
-      <h1>{getCountMessage()}</h1>
+      <h1><span className={changeClasses()}> {getCountMessage()}</span></h1>
       
       <table className="table-primary">
         <thead>
