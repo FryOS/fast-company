@@ -60,7 +60,7 @@ const usersTableHeaderRender = () => {
     <>
       <h1><span className={changeClasses()}> {getCountMessage()}</span></h1>
       
-      <table className="table-primary">
+      <table className="table table-primary">
         <thead>
           {usersTableHeaderRender()}
         </thead>
