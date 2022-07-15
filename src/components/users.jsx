@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import User from "./user"
 
-const Users = (props) => {    
-
+const Users = ({users, onDelete}) => {    
+//const {users, onDelete} = props
 const usersTableHeaderRender = () => {
       
   return (
         
-        props.users.length !== 0
+        users.length !== 0
         && <tr className="table-primary">
           <th className="table-primary" scope="col">Имя</th>
           <th className="table-primary" scope="col">Качества</th>
@@ -21,16 +21,14 @@ const usersTableHeaderRender = () => {
 
     const usersTableBodyRender = () => {
       return (
-        props.users.length !== 0 && props.users.map((user) => (
-          <User key={user._id} {...user}/>
+        users.length !== 0 && users.map((user) => (
+          <User key={user._id} {...user} onDelete={onDelete}/>
         ))
       )
     }    
     
     return(    
-    <>
-      
-      
+    <>     
       <table className="table table-primary">
         <thead>
           {usersTableHeaderRender()}
