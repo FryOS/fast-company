@@ -13,6 +13,7 @@ const usersTableHeaderRender = () => {
           <th className="table-primary" scope="col">Профессия</th>
           <th className="table-primary" scope="col">Встретился, раз</th>
           <th className="table-primary" scope="col">Оценка</th>
+          <th className="table-primary" scope="col">Избранное</th>
           <th className="table-primary" scope="col"></th>
         </tr>
       )

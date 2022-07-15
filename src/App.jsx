@@ -8,14 +8,18 @@ import API from "./api";
 
 const App = () => {
     
-    const [users, setCountPeople] = useState(() => API.users.fetchAll());
+    const [users, setUsers] = useState(() => API.users.fetchAll());
     
     const handleDeleteUser = (id)=>{
-        setCountPeople((prevState) => prevState.filter((user) => user._id !== id));
+        setUsers((prevState) => prevState.filter((user) => user._id !== id));
     };
 
-    const handleBookmark = () => {
-        console.log("bookmark");
+    const handleBookmark = (id) => {
+        const index = users.findIndex(u => u._id === id);
+        const newUsers = [...users];
+        newUsers[index].bookmark ? newUsers[index].bookmark = false : newUsers[index].bookmark = true;
+        setUsers(newUsers);
+
     }
 
     return (

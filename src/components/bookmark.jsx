@@ -2,8 +2,8 @@ import React from "react";
 
 const Bookmark = ({status, ...rest}) => {
     return (
-        <button {...rest} >
-            <i className="bi bi-bookmark"></i>
+        <button className="table-primary" {...rest} >
+            <i className={status ? "bi bi-bookmark" : "bi bi-bookmark-fill"}></i>
         </button>
     )
 }

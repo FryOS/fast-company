@@ -11,7 +11,7 @@ const User = (props) => {
             <td className="table-primary" scope="col" key={props.profession._id}>{props.profession.name}</td>
             <td className="table-primary" scope="col">{props.completedMeetings}</td>
             <td className="table-primary" scope="col">{props.rate}</td>
-            <td className="table-primary" scope="col"><Bookmark onClick={()=> props.onBookmark()}/></td>
+            <td className="table-primary" scope="col"><Bookmark status={props.bookmark} onClick={()=> props.onBookmark(props._id)}/></td>
             <td className="table-primary" scope="col"><button type="button" className="btn btn-primary" onClick={() => props.onDelete(props._id)}>Удалить</button></td>
       </tr>
         </>
