@@ -1,6 +1,6 @@
 import React from "react";
 
-import Users from "./users";
+import Users from "./components/users";
 
 
 const App = () => {

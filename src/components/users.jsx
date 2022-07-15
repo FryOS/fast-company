@@ -16,12 +16,11 @@ const Users = () => {
 
     const changeClasses = () => {
       let classes = "badge "
-      classes += users.length === 0 ? "bg-danger bg-primary" : "bg-primary"
+      classes += users.length === 0 ? "bg-danger bg-primary" : "bg-primary";
       return classes;
     }
 
     const handleDeleteUser = (id)=>{
-      console.log(id)
       setCountPeople((prevState) => prevState.filter((user) => user._id !== id));
     };
 
