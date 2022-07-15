@@ -5,8 +5,7 @@ const Users = ({users, onDelete}) => {
 //const {users, onDelete} = props
 const usersTableHeaderRender = () => {
       
-  return (
-        
+  return (        
         users.length !== 0
         && <tr className="table-primary">
           <th className="table-primary" scope="col">Имя</th>
