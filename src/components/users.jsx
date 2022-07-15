@@ -4,7 +4,9 @@ import User from "./user"
 const Users = (props) => {    
 
 const usersTableHeaderRender = () => {
-      return (
+      
+  return (
+        
         props.users.length !== 0
         && <tr className="table-primary">
           <th className="table-primary" scope="col">Имя</th>
@@ -20,7 +22,7 @@ const usersTableHeaderRender = () => {
     const usersTableBodyRender = () => {
       return (
         props.users.length !== 0 && props.users.map((user) => (
-          <User key={user._id} {...props}/>
+          <User key={user._id} {...user}/>
         ))
       )
     }    
