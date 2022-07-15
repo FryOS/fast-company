@@ -12,12 +12,16 @@ const App = () => {
     
     const handleDeleteUser = (id)=>{
         setCountPeople((prevState) => prevState.filter((user) => user._id !== id));
-      };
+    };
+
+    const handleBookmark = () => {
+        console.log("bookmark");
+    }
 
     return (
         <>
             <SearchStatus usersLength={users.length}/>;
-            <Users users={users} onDelete={handleDeleteUser} />;
+            <Users users={users} onDelete={handleDeleteUser} onBookmark={handleBookmark}/>;
         </>
     )
 }

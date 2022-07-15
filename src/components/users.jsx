@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import User from "./user"
 
-const Users = ({users, onDelete}) => {    
+const Users = ({users, onDelete, ...rest}) => {    
 //const {users, onDelete} = props
 const usersTableHeaderRender = () => {
       
@@ -21,7 +21,7 @@ const usersTableHeaderRender = () => {
     const usersTableBodyRender = () => {
       return (
         users.length !== 0 && users.map((user) => (
-          <User key={user._id} {...user} onDelete={onDelete}/>
+          <User key={user._id} {...user} onDelete={onDelete} {...rest}/>
         ))
       )
     }    
