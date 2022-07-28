@@ -57,8 +57,7 @@ User.propTypes = {
     bookmark: PropTypes.bool.isRequired,
     onBookmark: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    _id: PropTypes.number.isRequired
-
+    _id: PropTypes.string.isRequired
 };
 
 export default User;
