@@ -12,16 +12,20 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
 
-    const pageSize = 4;
+    const pageSize = 2;
+
+    useEffect(() => {
+        API.professions.fetchAll().then((data) => setProfession(data));
+    }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedProf]);
 
     const handlePageChange = (pageIndex) => {
         console.log("page:", pageIndex);
         setCurrentPage(pageIndex);
     };
-
-    useEffect(() => {
-        API.professions.fetchAll().then((data) => setProfession(data));
-    }, []);
 
     const handleProfessionsSelect = (item) => {
         setSelectedProf(item);
