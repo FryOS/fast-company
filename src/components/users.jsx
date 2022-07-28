@@ -75,10 +75,9 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
     };
 
     return (
-        <>
-            <SearchStatus usersLength={count} />
+        <div className="d-flex">
             {professions && (
-                <>
+                <div className="d-flex flex-column dlex-shrink-0 p-3">
                     <GroupList
                         selectedItem={selectedProf}
                         items={professions}
@@ -90,20 +89,24 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
                     >
                         Очистить
                     </button>
-                </>
+                </div>
             )}
-
-            <table className="table table-primary">
-                <thead>{usersTableHeaderRender()}</thead>
-                <tbody>{usersTableBodyRender()}</tbody>
-            </table>
-            <Pagination
-                itemsCount={count}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-            />
-        </>
+            <div className="d-flex flex-column">
+                <SearchStatus usersLength={count} />
+                <table className="table table-primary">
+                    <thead>{usersTableHeaderRender()}</thead>
+                    <tbody>{usersTableBodyRender()}</tbody>
+                </table>
+                <div className="d-flex justify-content-center">
+                    <Pagination
+                        itemsCount={count}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                    />
+                </div>
+            </div>
+        </div>
     );
 };
 
