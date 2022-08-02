@@ -2,27 +2,47 @@ import React from "react";
 import PropTypes from "prop-types";
 import User from "./user";
 
-const UserTable = ({ users, ...rest }) => {
+const UserTable = ({ users, onSort, ...rest }) => {
     const usersTableHeaderRender = () => {
         return (
             // count !== 0 && (
             <tr className="table-primary">
-                <th className="table-primary" scope="col">
+                <th
+                    onClick={() => onSort("name")}
+                    className="table-primary"
+                    scope="col"
+                >
                     Имя
                 </th>
                 <th className="table-primary" scope="col">
                     Качества
                 </th>
-                <th className="table-primary" scope="col">
+                <th
+                    onClick={() => onSort("profession.name")}
+                    className="table-primary"
+                    scope="col"
+                >
                     Профессия
                 </th>
-                <th className="table-primary" scope="col">
+                <th
+                    onClick={() => onSort("completedMeetings")}
+                    className="table-primary"
+                    scope="col"
+                >
                     Встретился, раз
                 </th>
-                <th className="table-primary" scope="col">
+                <th
+                    onClick={() => onSort("rate")}
+                    className="table-primary"
+                    scope="col"
+                >
                     Оценка
                 </th>
-                <th className="table-primary" scope="col">
+                <th
+                    onClick={() => onSort("bookmark")}
+                    className="table-primary"
+                    scope="col"
+                >
                     Избранное
                 </th>
                 <th className="table-primary" scope="col"></th>
@@ -33,11 +53,8 @@ const UserTable = ({ users, ...rest }) => {
 
     const usersTableBodyRender = () => {
         return (
-            
             // allUsers.length !== 0 &&
-            users.map((user) => (
-                <User key={user._id} {...user} {...rest}/>
-            ))
+            users.map((user) => <User key={user._id} {...user} {...rest} />)
         );
     };
 
@@ -52,5 +69,6 @@ const UserTable = ({ users, ...rest }) => {
 export default UserTable;
 
 UserTable.propTypes = {
-    users: PropTypes.array.isRequired
+    users: PropTypes.array.isRequired,
+    onSort: PropTypes.func.isRequired
 };
