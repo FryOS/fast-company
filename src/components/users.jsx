@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import User from "./user";
+// import User from "./user";
+import UserTable from "./usersTable";
 import Pagination from "./pagination";
 import SearchStatus from "./searchStatus";
 import GroupList from "./groupList";
@@ -7,7 +8,7 @@ import API from "../api";
 import { paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
 
-const Users = ({ users: allUsers, onDelete, ...rest }) => {
+const Users = ({ users: allUsers, ...rest }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
@@ -44,43 +45,6 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
     const count = filteredUsers.length;
     const userCrop = paginate(filteredUsers, currentPage, pageSize);
 
-    const usersTableHeaderRender = () => {
-        return (
-            count !== 0 && (
-                <tr className="table-primary">
-                    <th className="table-primary" scope="col">
-                        Имя
-                    </th>
-                    <th className="table-primary" scope="col">
-                        Качества
-                    </th>
-                    <th className="table-primary" scope="col">
-                        Профессия
-                    </th>
-                    <th className="table-primary" scope="col">
-                        Встретился, раз
-                    </th>
-                    <th className="table-primary" scope="col">
-                        Оценка
-                    </th>
-                    <th className="table-primary" scope="col">
-                        Избранное
-                    </th>
-                    <th className="table-primary" scope="col"></th>
-                </tr>
-            )
-        );
-    };
-
-    const usersTableBodyRender = () => {
-        return (
-            allUsers.length !== 0 &&
-            userCrop.map((user) => (
-                <User key={user._id} {...user} onDelete={onDelete} {...rest} />
-            ))
-        );
-    };
-
     return (
         <div className="d-flex">
             {professions && (
@@ -92,7 +56,7 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
                     />
                     <button
                         className="btn btn-secondary mt-2 mb-2"
-                        onClick={clearFilter}
+                        onClick={() => clearFilter(professions)}
                     >
                         Очистить
                     </button>
@@ -100,10 +64,7 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
             )}
             <div className="d-flex flex-column">
                 <SearchStatus usersLength={count} />
-                <table className="table table-primary">
-                    <thead>{usersTableHeaderRender()}</thead>
-                    <tbody>{usersTableBodyRender()}</tbody>
-                </table>
+                {count > 0 && <UserTable users={userCrop} {...rest} />}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
@@ -118,8 +79,7 @@ const Users = ({ users: allUsers, onDelete, ...rest }) => {
 };
 
 Users.propTypes = {
-    users: PropTypes.array.isRequired,
-    onDelete: PropTypes.func.isRequired
+    users: PropTypes.array.isRequired
 };
 
 export default Users;

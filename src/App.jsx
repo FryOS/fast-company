@@ -23,7 +23,6 @@ const App = () => {
             : (newUsers[index].bookmark = true);
         setUsers(newUsers);
     };
-
     return (
         <div>
             {users && (
