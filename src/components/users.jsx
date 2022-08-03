@@ -5,15 +5,18 @@ import Pagination from "./pagination";
 import SearchStatus from "./searchStatus";
 import GroupList from "./groupList";
 import API from "../api";
+import _ from "lodash";
+
 import { paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
 
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
 
-    const pageSize = 2;
+    const pageSize = 8;
 
     useEffect(() => {
         API.professions.fetchAll().then((data) => setProfession(data));
@@ -32,7 +35,14 @@ const Users = ({ users: allUsers, ...rest }) => {
     };
 
     const handleSort = (item) => {
-        console.log(item);
+        if (sortBy.iter === item) {
+            setSortBy((prevState) => ({
+                ...prevState,
+                order: prevState.order === "asc" ? "desc" : "asc"
+            }));
+        } else {
+            setSortBy({ iter: item, order: "asc" });
+        };
     };
 
     const clearFilter = (params) => {
@@ -47,7 +57,8 @@ const Users = ({ users: allUsers, ...rest }) => {
           )
         : allUsers;
     const count = filteredUsers.length;
-    const userCrop = paginate(filteredUsers, currentPage, pageSize);
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
     return (
         <div className="d-flex">
@@ -68,7 +79,9 @@ const Users = ({ users: allUsers, ...rest }) => {
             )}
             <div className="d-flex flex-column">
                 <SearchStatus usersLength={count} />
-                {count > 0 && <UserTable users={userCrop} onSort={handleSort} {...rest} />}
+                {count > 0 && (
+                    <UserTable users={userCrop} onSort={handleSort} {...rest} />
+                )}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
