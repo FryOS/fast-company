@@ -2,13 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import User from "./user";
 
-const UserTable = ({ users, onSort, ...rest }) => {
+const UserTable = ({ users, onSort, currentSort, ...rest }) => {
+    const handleSort = (item) => {
+        if (currentSort.iter === item) {
+            onSort({
+                ...currentSort,
+                order: currentSort.order === "asc" ? "desc" : "asc"
+            });
+        } else {
+            onSort({ iter: item, order: "asc" });
+        }
+    };
+
     const usersTableHeaderRender = () => {
         return (
             // count !== 0 && (
             <tr className="table-primary">
                 <th
-                    onClick={() => onSort("name")}
+                    onClick={() => handleSort("name")}
                     className="table-primary"
                     scope="col"
                 >
@@ -18,28 +29,28 @@ const UserTable = ({ users, onSort, ...rest }) => {
                     Качества
                 </th>
                 <th
-                    onClick={() => onSort("profession.name")}
+                    onClick={() => handleSort("profession.name")}
                     className="table-primary"
                     scope="col"
                 >
                     Профессия
                 </th>
                 <th
-                    onClick={() => onSort("completedMeetings")}
+                    onClick={() => handleSort("completedMeetings")}
                     className="table-primary"
                     scope="col"
                 >
                     Встретился, раз
                 </th>
                 <th
-                    onClick={() => onSort("rate")}
+                    onClick={() => handleSort("rate")}
                     className="table-primary"
                     scope="col"
                 >
                     Оценка
                 </th>
                 <th
-                    onClick={() => onSort("bookmark")}
+                    onClick={() => handleSort("bookmark")}
                     className="table-primary"
                     scope="col"
                 >
@@ -70,5 +81,6 @@ export default UserTable;
 
 UserTable.propTypes = {
     users: PropTypes.array.isRequired,
-    onSort: PropTypes.func.isRequired
+    onSort: PropTypes.func.isRequired,
+    currentSort: PropTypes.object.isRequired
 };
