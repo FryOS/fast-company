@@ -3,42 +3,48 @@ import Qualitie from "./quality";
 import Bookmark from "./bookmark";
 import PropTypes from "prop-types";
 
-const User = (props) => {
+const User = ({
+    name,
+    qualities,
+    profession,
+    completedMeetings,
+    rate,
+    bookmark,
+    onBookmark,
+    onDelete,
+    _id
+}) => {
     return (
         <>
             <tr className="table-primary" key={props._id}>
                 <td className="table-primary" scope="col">
-                    {props.name}
+                    {name}
                 </td>
                 <td className="table-primary" scope="col">
-                    {props.qualities.map((q) => (
+                    {qualities.map((q) => (
                         <Qualitie key={q._id} {...q} />
                     ))}
                 </td>
-                <td
-                    className="table-primary"
-                    scope="col"
-                    key={props.profession._id}
-                >
-                    {props.profession.name}
+                <td className="table-primary" scope="col" key={profession._id}>
+                    {profession.name}
                 </td>
                 <td className="table-primary" scope="col">
-                    {props.completedMeetings}
+                    {completedMeetings}
                 </td>
                 <td className="table-primary" scope="col">
-                    {props.rate}
+                    {rate}
                 </td>
                 <td className="table-primary" scope="col">
                     <Bookmark
-                        status={props.bookmark}
-                        onClick={() => props.onBookmark(props._id)}
+                        status={bookmark}
+                        onClick={() => onBookmark(_id)}
                     />
                 </td>
                 <td className="table-primary" scope="col">
                     <button
                         type="button"
                         className="btn btn-primary"
-                        onClick={() => props.onDelete(props._id)}
+                        onClick={() => onDelete(_id)}
                     >
                         Удалить
                     </button>

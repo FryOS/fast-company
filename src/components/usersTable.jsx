@@ -1,33 +1,58 @@
 import React from "react";
 import PropTypes from "prop-types";
-import User from "./user";
+// import User from "./user";
 import TableHeader from "./tableHeader";
+import TableBody from "./tableBody";
+import Bookmark from "./bookmark";
+import QualitiesList from "./qualitiesList";
 
-const UserTable = ({ users, onSort, selectedSort, ...rest }) => {
+const UserTable = ({
+    users,
+    onSort,
+    selectedSort,
+    onBookmark,
+    onDelete,
+    ...rest
+}) => {
     const columns = {
-        name: { iter: "name", name: "Имя" },
-        qualities: { name: "Качества" },
-        professions: { iter: "profession.name", name: "Профессия" },
+        name: { path: "name", name: "Имя" },
+        qualities: {
+            name: "Качества",
+            component: (user) => <QualitiesList qualities={user.qualities} />
+        },
+        professions: { path: "profession.name", name: "Профессия" },
         completedMeetings: {
-            iter: "completedMeetings",
+            path: "completedMeetings",
             name: "Встретился, раз"
         },
-        rate: { iter: "rate", name: "Оценка" },
-        bookmark: { iter: "bookmark", name: "Избранное" },
-        delete: {}
-    };
-    const usersTableHeaderRender = () => {
-        return <TableHeader {...{ onSort, selectedSort, columns }} />;
-    };
-
-    const usersTableBodyRender = () => {
-        return users.map((user) => <User key={user._id} {...user} {...rest} />);
+        rate: { path: "rate", name: "Оценка" },
+        bookmark: {
+            path: "bookmark",
+            name: "Избранное",
+            component: (user) => (
+                <Bookmark
+                    status={user.bookmark}
+                    onClick={() => onBookmark(user._id)}
+                />
+            )
+        },
+        delete: {
+            component: (user) => (
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => onDelete(user._id)}
+                >
+                    Удалить
+                </button>
+            )
+        }
     };
 
     return (
         <table className="table table-primary">
-            <thead>{usersTableHeaderRender()}</thead>
-            <tbody>{usersTableBodyRender()}</tbody>
+            <TableHeader {...{ onSort, selectedSort, columns }} />
+            <TableBody {...{ columns, data: users }} />
         </table>
     );
 };
@@ -37,5 +62,7 @@ export default UserTable;
 UserTable.propTypes = {
     users: PropTypes.array.isRequired,
     onSort: PropTypes.func.isRequired,
-    selectedSort: PropTypes.object.isRequired
+    selectedSort: PropTypes.object.isRequired,
+    onBookmark: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
