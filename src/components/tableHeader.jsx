@@ -27,48 +27,9 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                     {...{ role: columns[column].path && "button" }}
                 >
                     {columns[column].name}
+                    <i className="bi bi-caret-down-fill"></i>
                 </th>
             ))}
-
-            {/* <th
-                onClick={() => handleSort("name")}
-                className="table-primary"
-                scope="col"
-            >
-                Имя
-            </th>
-            <th className="table-primary" scope="col">
-                Качества
-            </th>
-            <th
-                onClick={() => handleSort("profession.name")}
-                className="table-primary"
-                scope="col"
-            >
-                Профессия
-            </th>
-            <th
-                onClick={() => handleSort("completedMeetings")}
-                className="table-primary"
-                scope="col"
-            >
-                Встретился, раз
-            </th>
-            <th
-                onClick={() => handleSort("rate")}
-                className="table-primary"
-                scope="col"
-            >
-                Оценка
-            </th>
-            <th
-                onClick={() => handleSort("bookmark")}
-                className="table-primary"
-                scope="col"
-            >
-                Избранное
-            </th>
-            <th className="table-primary" scope="col"></th> */}
         </tr>
     );
 };
