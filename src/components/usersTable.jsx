@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import User from "./user";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
 import Table from "./table";
+// import { Tab } from "bootstrap";
 
 const UserTable = ({
     users,
@@ -51,10 +51,15 @@ const UserTable = ({
     };
 
     return (
-        <table className="table table-primary">
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={users}
+        >
             <TableHeader {...{ onSort, selectedSort, columns }} />
             <TableBody {...{ columns, data: users }} />
-        </table>
+        </Table>
     );
 };
 
