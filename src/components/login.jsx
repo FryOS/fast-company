@@ -1,29 +1,35 @@
 import React, { useState } from "react";
+import TextField from "./textField";
 
 const Login = () => {
-    const [email, setEmail] = useState();
+    const [data, setData] = useState({ email: "", password: "" });
     // const [password, setPassword] = useState(); // Для каждого поля делать свое состояние. Что не есть хорошо
 
-    const handleChange = (event) => {
-        setEmail(event.target.value);
-        console.log(event.target.value);
+    //  по name отслеживаем какое поле мы изменяем, handleChange универсальный метод для каждого поля
+    // value меняем для каждого поля в зависимости какой target используется
+    const handleChange = ({ target }) => {
+        setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value
+        }));
     };
 
+    //  TextField унифицированный элемент
     return (
         <form action="">
-            <div>
-                <label htmlFor="email">Email</label>{" "}
-                <input
-                    type="text"
-                    id="email"
-                    value={email}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>{" "}
-                <input type="password" id="password" />
-            </div>
+            <TextField
+                label="Электронная почта"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+            />
+            <TextField
+                label="Пароль"
+                type="password"
+                name="password"
+                value={data.password}
+                onChange={handleChange}
+            />
         </form>
     );
 };
