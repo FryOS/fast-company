@@ -94,8 +94,12 @@ const Users = () => {
                         </button>
                     </div>
                 )}
+
                 <div className="d-flex flex-column">
                     <SearchStatus usersLength={count} />
+                    <form>
+                        <input placeholder="Search" type="text" name="" id="" />
+                    </form>
                     {count > 0 && (
                         <UserTable
                             users={userCrop}
