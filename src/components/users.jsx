@@ -60,8 +60,8 @@ const Users = () => {
     };
 
     const handleProfessionsSelect = (item) => {
-        setValue("");
         setSelectedProf(item);
+        setValue("");
     };
 
     const handleSort = (item) => {
