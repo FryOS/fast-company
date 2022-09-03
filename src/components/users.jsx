@@ -15,7 +15,7 @@ const Users = () => {
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
-    const [value, setValue] = useState("");
+    const [searchValue, setSearchValue] = useState("");
 
     const pageSize = 8;
 
@@ -25,9 +25,9 @@ const Users = () => {
         API.users.fetchAll().then((data) => setUsers(data));
     }, []);
 
-    const filteredNameUsers = users.filter((userName) => {
-        return userName.name.toLowerCase().includes(value.toLowerCase());
-    });
+    // const filteredNameUsers = users.filter((userName) => {
+    //     return userName.name.toLowerCase().includes(searchValue.toLowerCase());
+    // });
 
     const handleDeleteUser = (id) => {
         setUsers((prevState) => prevState.filter((user) => user._id !== id));
@@ -48,7 +48,7 @@ const Users = () => {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProf, value]);
+    }, [selectedProf, searchValue]);
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
@@ -56,12 +56,12 @@ const Users = () => {
 
     const handleUserSearch = ({ target }) => {
         setSelectedProf(); // show all users
-        setValue(target.value);
+        setSearchValue(target.value);
     };
 
     const handleProfessionsSelect = (item) => {
         setSelectedProf(item);
-        setValue("");
+        setSearchValue("");
     };
 
     const handleSort = (item) => {
@@ -79,8 +79,10 @@ const Users = () => {
                       JSON.stringify(user.profession) ===
                       JSON.stringify(selectedProf)
               )
-            : value
-            ? filteredNameUsers
+            : searchValue
+            ? users.filter((user) => {
+                  return user.name.toLowerCase().includes(searchValue.toLowerCase());
+              })
             : users;
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
