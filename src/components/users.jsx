@@ -15,6 +15,7 @@ const Users = () => {
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
+    const [value, setValue] = useState("");
 
     const pageSize = 8;
 
@@ -23,6 +24,10 @@ const Users = () => {
     useEffect(() => {
         API.users.fetchAll().then((data) => setUsers(data));
     }, []);
+
+    const filteredNameUsers = users.filter((userName) => {
+        return userName.name.toLowerCase().includes(value.toLowerCase());
+    });
 
     const handleDeleteUser = (id) => {
         setUsers((prevState) => prevState.filter((user) => user._id !== id));
@@ -43,13 +48,19 @@ const Users = () => {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProf]);
+    }, [selectedProf, value]);
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
 
+    const handleUserSearch = ({ target }) => {
+        setSelectedProf(); // show all users
+        setValue(target.value);
+    };
+
     const handleProfessionsSelect = (item) => {
+        setValue("");
         setSelectedProf(item);
     };
 
@@ -68,6 +79,8 @@ const Users = () => {
                       JSON.stringify(user.profession) ===
                       JSON.stringify(selectedProf)
               )
+            : value
+            ? filteredNameUsers
             : users;
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
@@ -98,7 +111,12 @@ const Users = () => {
                 <div className="d-flex flex-column">
                     <SearchStatus usersLength={count} />
                     <form>
-                        <input placeholder="Search" type="text" name="" id="" />
+                        <input
+                            placeholder="Search"
+                            type="text"
+                            name="search"
+                            onChange={handleUserSearch}
+                        />
                     </form>
                     {count > 0 && (
                         <UserTable
