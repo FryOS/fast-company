@@ -1,7 +1,7 @@
 import React from "react";
 // import Users from "./components/users";
 import Login from "./components/login";
-import Navbar from "./components/navBar";
+import Navbar from "./components/ui/navBar";
 import Main from "./components/main";
 import { Route } from "react-router-dom";
 import UserView from "./components/userView";

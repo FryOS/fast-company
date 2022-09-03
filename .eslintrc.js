@@ -23,6 +23,8 @@ module.exports = {
                 named: "never"
             }
         ],
-        quotes: ["error", "double", { allowTemplateLiterals: true }]
+        quotes: ["error", "double", { allowTemplateLiterals: true }],
+        "eol-last": 0,
+        "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 0 }]
     }
 };
