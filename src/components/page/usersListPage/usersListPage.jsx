@@ -20,10 +20,6 @@ const UsersListPage = () => {
 
     const [users, setUsers] = useState();
 
-    useEffect(() => {
-        API.users.fetchAll().then((data) => setUsers(data));
-    }, []);
-
     const handleDeleteUser = (id) => {
         setUsers((prevState) => prevState.filter((user) => user._id !== id));
     };

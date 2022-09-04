@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
+import API from "../../api";
+import SelectedField from "../common/form/selectedField";
 
 const RegisterForm = () => {
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        profession: ""
+    });
     // const [password, setPassword] = useState(); // Для каждого поля делать свое состояние. Что не есть хорошо
 
     const [errors, setErrors] = useState({});
-
+    const [professions, setProfession] = useState();
     const isValid = Object.keys(errors).length === 0;
 
-    //  по name отслеживаем какое поле мы изменяем, handleChange универсальный метод для каждого поля
-    // value меняем для каждого поля в зависимости какой target используется
+    useEffect(() => {
+        API.professions.fetchAll().then((data) => setProfession(data));
+    }, []);
+
+    useEffect(() => {
+        console.log(professions);
+    }, [professions]);
+
     const handleChange = ({ target }) => {
         setData((prevState) => ({
             ...prevState,
@@ -80,17 +92,14 @@ const RegisterForm = () => {
                 error={errors.password}
                 onChange={handleChange}
             />
-            <div className="mb-4">
-                <label htmlFor="validationCustom04" className="form-label">
-                    State
-                </label>
-                <select className="form-select" id="validationCustom04" required>
-                    <option selected disabled value="">
-                        Choose...
-                    </option>++
-                </select>
-                <div className="invalid-feedback">Please select a valid state.</div>
-            </div>
+            <SelectedField
+                label="Выберите вашу профессию"
+                defaultOptions="Выберите..."
+                value={data.profession}
+                onChange={handleChange}
+                options={professions}
+                error={errors.profession}
+            />
             <button
                 classNameName="btn btn-primary w-100 mx-auto"
                 type="submit"
