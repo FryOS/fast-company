@@ -54,6 +54,11 @@ const RegisterForm = () => {
                 message: "Пароль должен составить минимум из 8 символов",
                 value: 8
             }
+        },
+        profession: {
+            isRequired: {
+                message: "Обязательно выберите вашу профессию"
+            }
         }
     };
 
