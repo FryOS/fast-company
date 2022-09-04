@@ -12,7 +12,7 @@ const App = () => {
             <Navbar />
             {/* <Users /> */}
             {/* <Route path="/login" component={Login} /> */}
-            <Route path="/login" render={(props) => <Login {...props} />} />
+            <Route path="/login/:type?" render={(props) => <Login {...props} />} />
             <Route path="/main" component={Main} />
             <Route path="/users/:userId?" component={UserView} />
         </>

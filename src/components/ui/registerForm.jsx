@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const [data, setData] = useState({ email: "", password: "" });
     // const [password, setPassword] = useState(); // Для каждого поля делать свое состояние. Что не есть хорошо
 
@@ -80,8 +80,19 @@ const LoginForm = () => {
                 error={errors.password}
                 onChange={handleChange}
             />
+            <div className="mb-4">
+                <label htmlFor="validationCustom04" className="form-label">
+                    State
+                </label>
+                <select className="form-select" id="validationCustom04" required>
+                    <option selected disabled value="">
+                        Choose...
+                    </option>++
+                </select>
+                <div className="invalid-feedback">Please select a valid state.</div>
+            </div>
             <button
-                className="btn btn-primary w-100 mx-auto"
+                classNameName="btn btn-primary w-100 mx-auto"
                 type="submit"
                 disabled={!isValid}
             >
@@ -91,4 +102,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default RegisterForm;

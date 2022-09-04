@@ -24,10 +24,6 @@ const UsersListPage = () => {
         API.users.fetchAll().then((data) => setUsers(data));
     }, []);
 
-    // const filteredNameUsers = users.filter((userName) => {
-    //     return userName.name.toLowerCase().includes(searchValue.toLowerCase());
-    // });
-
     const handleDeleteUser = (id) => {
         setUsers((prevState) => prevState.filter((user) => user._id !== id));
     };
@@ -59,8 +55,8 @@ const UsersListPage = () => {
     };
 
     const handleProfessionsSelect = (item) => {
-        setSelectedProf(item);
         setSearchValue("");
+        setSelectedProf(item);
     };
 
     const handleSort = (item) => {
@@ -72,6 +68,12 @@ const UsersListPage = () => {
     };
 
     if (users) {
+        const filteredNameUsers = users.filter((userName) => {
+            return userName.name
+                .toLowerCase()
+                .includes(searchValue.toLowerCase());
+        });
+
         const filteredUsers = selectedProf
             ? users.filter(
                   (user) =>
@@ -79,9 +81,7 @@ const UsersListPage = () => {
                       JSON.stringify(selectedProf)
               )
             : searchValue
-            ? users.filter((user) => {
-                  return user.name.toLowerCase().includes(searchValue.toLowerCase());
-              })
+            ? filteredNameUsers
             : users;
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(
@@ -116,6 +116,7 @@ const UsersListPage = () => {
                             placeholder="Search"
                             type="text"
                             name="search"
+                            value={searchValue}
                             onChange={handleUserSearch}
                         />
                     </form>
