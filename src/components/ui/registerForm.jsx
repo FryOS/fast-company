@@ -3,12 +3,15 @@ import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
 import API from "../../api";
 import SelectedField from "../common/form/selectedField";
+import RadioField from "../common/form/radioField";
+import Select from "react-select";
 
 const RegisterForm = () => {
     const [data, setData] = useState({
         email: "",
         password: "",
-        profession: ""
+        profession: "",
+        sex: "male"
     });
     // const [password, setPassword] = useState(); // Для каждого поля делать свое состояние. Что не есть хорошо
 
@@ -105,6 +108,24 @@ const RegisterForm = () => {
                 options={professions}
                 error={errors.profession}
             />
+            <RadioField
+                options={[
+                    { name: "Male", value: "male" },
+                    { name: "Female", value: "female" },
+                    { name: "Other", value: "other" }
+                ]}
+                value={data.sex}
+                name="sex"
+                onChange={handleChange}
+            />
+            <Select
+                isMulti
+                options={}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                onChange={handleChange}
+            />
+
             <button
                 classNameName="btn btn-primary w-100 mx-auto"
                 type="submit"

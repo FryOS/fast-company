@@ -53,8 +53,8 @@ SelectedField.propTypes = {
     defaultOptions: PropTypes.string,
     value: PropTypes.string,
     error: PropTypes.string,
-    options: PropTypes.string,
-    onChange: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    onChange: PropTypes.func
 };
 
 export default SelectedField;
