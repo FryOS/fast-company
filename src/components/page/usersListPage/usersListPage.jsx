@@ -5,9 +5,8 @@ import SearchStatus from "../../ui/searchStatus";
 import GroupList from "../../common/groupList";
 import API from "../../../api";
 import _ from "lodash";
-
-import { paginate } from "../../../utils/paginate";
 import PropTypes from "prop-types";
+import { paginate } from "../../../utils/paginate";
 
 const UsersListPage = () => {
     console.log(API);
@@ -20,6 +19,9 @@ const UsersListPage = () => {
     const pageSize = 8;
 
     const [users, setUsers] = useState();
+    useEffect(() => {
+        API.users.fetchAll().then((data) => setUsers(data));
+    }, []);
 
     const handleDeleteUser = (id) => {
         setUsers((prevState) => prevState.filter((user) => user._id !== id));
