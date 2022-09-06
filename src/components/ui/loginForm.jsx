@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
+import CheckboxField from "../common/form/checkboxField";
 
 const LoginForm = () => {
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        stayOn: false
+    });
     // const [password, setPassword] = useState(); // Для каждого поля делать свое состояние. Что не есть хорошо
 
     const [errors, setErrors] = useState({});
@@ -12,7 +17,8 @@ const LoginForm = () => {
 
     //  по name отслеживаем какое поле мы изменяем, handleChange универсальный метод для каждого поля
     // value меняем для каждого поля в зависимости какой target используется
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
+        console.log("target", target);
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
@@ -80,6 +86,11 @@ const LoginForm = () => {
                 error={errors.password}
                 onChange={handleChange}
             />
+            <CheckboxField
+                value={data.stayOn}
+                onChange={handleChange}
+                name="stayOn"
+            >Оставаться в системе</CheckboxField>
             <button
                 className="btn btn-primary w-100 mx-auto"
                 type="submit"
