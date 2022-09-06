@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../../../api";
+import API from "../../../api";
 import PropTypes from "prop-types";
 import Qualities from "../../ui/qualities";
 import { useHistory } from "react-router-dom";
@@ -11,7 +11,7 @@ const UserPage = ({ userId }) => {
         history.push("/users");
     };
     useEffect(() => {
-        api.users.getById(userId).then((data) => setUser(data));
+        API.users.getById(userId).then((data) => setUser(data));
     }, []);
 
     if (user) {

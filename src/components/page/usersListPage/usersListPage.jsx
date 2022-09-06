@@ -10,6 +10,7 @@ import { paginate } from "../../../utils/paginate";
 import PropTypes from "prop-types";
 
 const UsersListPage = () => {
+    console.log(API);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [professions, setProfession] = useState();
@@ -41,6 +42,10 @@ const UsersListPage = () => {
         setCurrentPage(1);
     }, [selectedProf, searchValue]);
 
+    useEffect(() => {
+        console.log(users);
+    }, [users]);
+
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
@@ -69,6 +74,8 @@ const UsersListPage = () => {
                 .toLowerCase()
                 .includes(searchValue.toLowerCase());
         });
+
+        console.log(users);
 
         const filteredUsers = selectedProf
             ? users.filter(
